@@ -1,4 +1,4 @@
-// MVF Thesis, Beta. Eine Datei fuer alle Seiten; jeder Teil
+// MVF Thesis Hub, Beta. Eine Datei fuer alle Seiten; jeder Teil
 // prueft selbst, ob seine Seite geladen ist.
 (function () {
   "use strict";
@@ -96,7 +96,7 @@
   function liste(D) {
     const A = D.arbeiten, H = D.hubs;
     const form = $("#filter"), feld = $("#q"), sort = $("#sortierung");
-    const GRUPPEN = ["art", "hub", "hs", "jahr", "ansatz", "daten", "volltext", "preis"];
+    const GRUPPEN = ["stufe", "hub", "hs", "jahr", "ansatz", "daten", "volltext", "preis"];
 
     // Suchtext je Arbeit, in Woerter zerlegt. Kurze Suchwoerter (bis zwei
     // Zeichen) muessen ein ganzes Wort treffen, laengere einen Wortanfang:
@@ -108,7 +108,7 @@
       w._woerter = falten(text).split(/[^a-z0-9]+/).filter(Boolean);
     });
     const werte = w => ({
-      art: [w.art], hub: w.hubs, hs: [w.hs], jahr: [w.abschluss.slice(0, 4)], ansatz: [w.ansatz],
+      stufe: [w.stufe], hub: w.hubs, hs: [w.hs], jahr: [w.abschluss.slice(0, 4)], ansatz: [w.ansatz],
       daten: w.datenkat, volltext: [w.vt], preis: w.preis ? ["ja"] : []
     });
 
@@ -167,7 +167,12 @@
       treffer.sort((x, y) => art === "titel" ? x.titel.localeCompare(y.titel, "de")
         : art === "portal" ? y.seit.localeCompare(x.seit) || y.nr.localeCompare(x.nr)
           : y.abschluss.localeCompare(x.abschluss) || x.titel.localeCompare(y.titel, "de"));
-      $("#liste").innerHTML = treffer.length ? treffer.map(karte).join("")
+      // Roski 02.11.2026: Jede Arbeit bleibt in ihrer Leistungsklasse, die drei Stufen stehen getrennt.
+      const gruppiert = D.stufen.map(st => {
+        const t = treffer.filter(w => w.stufe === st.key);
+        return t.length ? `<h3 class="stufe-kopf">${esc(st.name)}<small>${esc(st.inhalt)} · ${t.length} ${t.length === 1 ? "Arbeit" : "Arbeiten"}</small></h3>` + t.map(karte).join("") : "";
+      }).join("");
+      $("#liste").innerHTML = treffer.length ? gruppiert
         : '<div class="leer-hinweis">Keine Arbeit passt zu dieser Auswahl. <button class="knopf leise" type="button" id="leer-zurueck">Filter zurücksetzen</button></div>';
       $("#treffer").textContent = treffer.length === A.length ? `${A.length} Arbeiten` : `${treffer.length} von ${A.length} Arbeiten`;
       // Zahlen je Option: wie viele Arbeiten es mit dieser Option gaebe
@@ -249,7 +254,7 @@
     <div><h3><a href="profil/${p.slug}.html">${esc(p.name)}</a></h3><p class="status">${esc(p.status)}</p></div></div>
   <p class="kurz">${esc(p.kurz)}</p>
   ${p.sucht ? `<p class="arbeit-zeile"><b>Sucht:</b> ${esc(p.sucht)}</p>` : ""}
-  <p class="arbeit-zeile">Im Portal: ${arb}</p>
+  <p class="arbeit-zeile">Im Thesis Hub: ${arb}</p>
   ${kontakt}
 </article>`;
     }
@@ -298,7 +303,7 @@
   year = {${jahr}},
   type = {${w.unterart || w.art}},
   doi = {${w.doi}},
-  note = {Kurzfassung bei MVF Thesis · Best of Versorgungsforschung (Monitor Versorgungsforschung, in Kooperation mit dem DNVF)}
+  note = {Kurzfassung im MVF Thesis Hub (Monitor Versorgungsforschung, in Kooperation mit dem DNVF)}
 }
 `;
     const ris = ["TY  - " + (w.art === "Dissertation" || w.art.endsWith("arbeit") ? "THES" : "GEN")]
@@ -321,7 +326,7 @@
   if (formE) einreichen(formE);
 
   function einreichen(form) {
-    const SCHLUESSEL = "thesis-beta-einreichung";
+    const SCHLUESSEL = "thesis-hub-einreichung";
     const box = $("#autoren");
     let nAutoren = 0;
     function autorHinzu(daten) {

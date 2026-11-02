@@ -1,4 +1,4 @@
-/* Thesis-Portal – Vorschau. Farben wie in den Knowledge-Hubs,
+/* MVF Thesis Hub, Beta. Farben wie in den Knowledge-Hubs,
    Seitenaufbau nach Mariann Stegmaiers Entwurf vom 27.10.2026. */
 @font-face{ font-family:"Lato"; font-style:normal; font-weight:300; font-display:swap; src:url("fonts/lato-300.woff2") format("woff2"); }
 @font-face{ font-family:"Lato"; font-style:normal; font-weight:400; font-display:swap; src:url("fonts/lato-400.woff2") format("woff2"); }
@@ -154,6 +154,13 @@ main{ padding:26px 0 56px; }
 .liste-kopf .sortierung{ margin-left:auto; font-size:14px; color:var(--ink-soft); }
 .liste-kopf select{ font:inherit; font-size:14px; padding:6px 8px; border:1px solid var(--line); border-radius:7px; background:var(--card); color:var(--ink); }
 .liste{ display:grid; gap:14px; }
+.stufe-kopf{ margin:10px 0 -4px; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--brand-deep); border-bottom:2px solid var(--brand-tint); padding-bottom:6px; }
+.stufe-kopf:first-child{ margin-top:0; }
+.stufe-kopf small{ display:block; font-size:13px; letter-spacing:0; text-transform:none; color:var(--ink-faint); font-weight:400; margin-top:2px; }
+.muster{ background:var(--card-2); border:1px solid var(--line); border-left:4px solid var(--gold); border-radius:10px; padding:16px 20px; }
+.muster p{ margin:0 0 10px; }
+.muster p:last-child{ margin:0; }
+.brauchen-nicht li::marker{ content:'✕  '; color:var(--ink-faint); }
 .karte{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; box-shadow:var(--shadow); }
 .karte-oben{ display:flex; gap:10px; align-items:flex-start; justify-content:space-between; margin-bottom:8px; }
 .pillen{ display:flex; flex-wrap:wrap; gap:6px; }
