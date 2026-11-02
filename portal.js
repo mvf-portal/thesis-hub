@@ -130,9 +130,9 @@
     }
 
     function karte(w) {
-      const pillen = [`<span class="pille art">${esc(w.unterart ? w.art + " · " + w.unterart : w.art)}</span>`]
+      const pillen = [`<span class="pille siegel">Ausgezeichnet</span><span class="pille art">${esc(w.unterart ? w.art + " · " + w.unterart : w.art)}</span>`]
         .concat(w.hubs.map(h => `<span class="pille${H[h].krank ? " krank" : ""}">${esc(H[h].name)}</span>`))
-        .concat(w.preis ? ['<span class="pille preis">Nachwuchspreis DKVF 2026</span>'] : []).join("");
+        .concat(w.preis ? ['<span class="pille preis">Shortlist Nachwuchspreis DKVF 2026</span>'] : []).join("");
       const seite = `arbeit/${w.nr}.html`;
       let voll;
       if (w.volltext === "pdf") voll = `<a class="knopf leise" href="#" data-vorschau>Volltext (PDF)</a>`;
@@ -285,7 +285,7 @@
 
   function arbeitSeite(w) {
     $$("[data-kopieren]").forEach(b => b.addEventListener("click", () =>
-      kopieren($("#" + b.dataset.kopieren).textContent, "Zitierangabe kopiert (Vancouver)")));
+      kopieren($("#" + b.dataset.kopieren).textContent, "Zitierangabe kopiert")));
 
     const jahr = w.abschluss.slice(0, 4);
     const typ = w.art === "Dissertation" ? "phdthesis" : w.art === "Weitere Arbeit" ? "misc" : "mastersthesis";
@@ -298,7 +298,7 @@
   year = {${jahr}},
   type = {${w.unterart || w.art}},
   doi = {${w.doi}},
-  note = {Kurzfassung im Thesis-Portal von DNVF und Monitor Versorgungsforschung}
+  note = {Kurzfassung im Thesis-Portal (Monitor Versorgungsforschung, in Kooperation mit dem DNVF)}
 }
 `;
     const ris = ["TY  - " + (w.art === "Dissertation" || w.art.endsWith("arbeit") ? "THES" : "GEN")]
@@ -321,7 +321,7 @@
   if (formE) einreichen(formE);
 
   function einreichen(form) {
-    const SCHLUESSEL = "thesis-vorschau-einreichung";
+    const SCHLUESSEL = "thesis-beta-einreichung";
     const box = $("#autoren");
     let nAutoren = 0;
     function autorHinzu(daten) {

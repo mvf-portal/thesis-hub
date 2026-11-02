@@ -440,3 +440,25 @@ details.fgruppe .gewaehlt{ color:var(--brand); letter-spacing:0; text-transform:
 .einstieg.blau .suche-zeile{ padding:0; gap:0; overflow:hidden; border-radius:10px; }
 .einstieg.blau .suche-zeile input{ padding:17px 20px; font-size:17px; }
 .einstieg.blau .suche-zeile button{ border-radius:0; padding:0 30px; font-size:16px; }
+
+/* ---- Variante B: MVF-Edition Ausgezeichnet (30.10.2026) ---- */
+.portalname .siegel-gross{ width:40px; height:40px; flex:0 0 40px; border-radius:50%; display:grid; place-items:center; background:var(--gold-tint); color:var(--gold-text); border:1.5px solid color-mix(in srgb, var(--gold) 70%, transparent); }
+.portalname .siegel-gross svg{ width:24px; height:24px; }
+.gepruft-zeile svg{ width:18px; height:18px; vertical-align:-3px; margin-right:6px; }
+.pille.siegel{ background:var(--gold-tint); color:var(--gold-text); }
+.pille.siegel svg{ width:13px; height:13px; }
+.geleitwort{ border-left:4px solid var(--gold); }
+.geleitwort h2{ margin:0 0 8px; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-text); }
+.geleitwort blockquote{ margin:0; font-size:17px; font-style:italic; line-height:1.55; }
+.geleitwort blockquote p{ margin:0; }
+.geleitwort .gw-wer{ margin:10px 0 0; font-size:14px; color:var(--ink-soft); font-weight:700; }
+.siegel-kasten h2{ display:flex; align-items:center; gap:8px; }
+.siegel-kasten h2 svg{ width:20px; height:20px; color:var(--gold-text); }
+.kontingent{ display:flex; gap:16px; align-items:center; background:var(--gold-tint); border-radius:12px; padding:14px 18px; margin-bottom:16px; }
+.kontingent .zahl{ font-size:24px; font-weight:700; color:var(--gold-text); white-space:nowrap; }
+.kontingent small{ display:block; font-size:13.5px; color:var(--ink-soft); margin-top:2px; }
+.hinweis.einladung{ margin-bottom:16px; border-left:4px solid var(--brand); }
+.schritt.entscheidung{ outline:2px solid color-mix(in srgb, var(--gold) 70%, transparent); outline-offset:-2px; }
+.vorlagen{ margin:0; padding-left:20px; }
+.vorlagen li{ margin:4px 0; }
+.vorschau-band a{ color:inherit; font-weight:700; }
