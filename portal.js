@@ -1,4 +1,4 @@
-// Thesis-Portal – Vorschau. Eine Datei fuer alle Seiten; jeder Teil
+// MVF Thesis, Beta. Eine Datei fuer alle Seiten; jeder Teil
 // prueft selbst, ob seine Seite geladen ist.
 (function () {
   "use strict";
@@ -298,7 +298,7 @@
   year = {${jahr}},
   type = {${w.unterart || w.art}},
   doi = {${w.doi}},
-  note = {Kurzfassung im Thesis-Portal (Monitor Versorgungsforschung, in Kooperation mit dem DNVF)}
+  note = {Kurzfassung bei MVF Thesis · Best of Versorgungsforschung (Monitor Versorgungsforschung, in Kooperation mit dem DNVF)}
 }
 `;
     const ris = ["TY  - " + (w.art === "Dissertation" || w.art.endsWith("arbeit") ? "THES" : "GEN")]
