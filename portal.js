@@ -286,6 +286,23 @@
     zeigen();
   }
 
+  // ---- Forschungsstandorte auf profile-einrichtungen.html (seit 04.11.2026) --
+  const stFeld = $("#st-q");
+  if (stFeld) {
+    const zeilen = $$("#standortliste .standort-zeile");
+    const zahl = () => {
+      const tokens = falten(stFeld.value).split(/[^a-z0-9]+/).filter(Boolean);
+      let n = 0;
+      zeilen.forEach(z => {
+        const w = falten(z.dataset.text).split(/[^a-z0-9]+/).filter(Boolean);
+        const ja = tokens.every(t => w.some(x => x.startsWith(t)));
+        z.hidden = !ja; if (ja) n++;
+      });
+      $("#st-zahl").textContent = tokens.length ? `${n} von ${zeilen.length} Hochschulen` : "";
+    };
+    stFeld.addEventListener("input", zahl);
+  }
+
   // ---- Seite einer Arbeit -------------------------------------------------
   const arbeitEl = $("#arbeit-daten");
   if (arbeitEl) arbeitSeite(JSON.parse(arbeitEl.textContent));

@@ -505,3 +505,15 @@ details.fgruppe .gewaehlt{ color:var(--brand); letter-spacing:0; text-transform:
 /* 04.11.2026, Handybreite: Kartenkopf bricht um, lange Platzhalter auch */
 @media (max-width:600px){ .karte-oben{ flex-wrap:wrap; } .pillen{ min-width:0; } .offen{ white-space:normal; } }
 .zweispaltig > *, .arbeit-raster > *{ min-width:0; }
+/* Seit 04.11.2026: Forschungsstandorte der Versorgungsforschung auf der Einrichtungsseite */
+.standorte{ margin-top:34px; }
+.standortliste{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px; }
+@media (max-width:960px){ .standortliste{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+@media (max-width:640px){ .standortliste{ grid-template-columns:1fr; } }
+.standortliste li{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 14px; }
+.standortliste li[hidden]{ display:none; }
+.standortliste a{ font-weight:700; overflow-wrap:anywhere; }
+.standortliste small{ display:block; font-size:12.5px; color:var(--ink-faint); margin-top:2px; }
+.weitere-standorte{ margin-top:16px; }
+.weitere-standorte summary{ cursor:pointer; font-weight:700; color:var(--brand); padding:6px 0; }
+.weitere-standorte .standortliste{ margin-top:8px; }
