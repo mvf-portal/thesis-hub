@@ -102,7 +102,7 @@
     // Zeichen) muessen ein ganzes Wort treffen, laengere einen Wortanfang:
     // „Hochschule C“ findet so nur Hochschule C, „Master“ die Masterarbeiten.
     A.forEach(w => {
-      const text = [w.titel, w.namen, w.hs, w.sg, w.art, w.unterart || "", w.abschluss.slice(0, 4), w.abschluss_text,
+      const text = [w.titel, w.namen, w.hs, w.sg, w.betreut_text, w.art, w.unterart || "", w.abschluss.slice(0, 4), w.abschluss_text,
         w.ansatz, w.daten.join(" "), w.hg, w.me, w.er, w.be, w.ergebnis, w.stw.join(" "),
         w.hubs.map(h => H[h].name).join(" "), w.preis ? "Nachwuchspreis DKVF" : ""].join(" ");
       w._woerter = falten(text).split(/[^a-z0-9]+/).filter(Boolean);
@@ -140,11 +140,13 @@
       else if (w.volltext === "anfrage") voll = `<a class="knopf leise" href="${seite}#anfrage">Volltext anfragen</a>`;
       else voll = `<span class="klein">Nur Kurzfassung (Sperrvermerk)</span>`;
       const stw = w.stw.map(s => `<li><a href="?q=${encodeURIComponent(s)}" data-stw="${esc(s)}">${esc(s)}</a></li>`).join("");
-      const betreuung = w.betreuung.join(", ");
+      // Seit 04.11.2026: Betreuende und Einrichtung stehen gleich unter den Verfassenden, mit Profil.
+      // betreut_html baut bauen.py (betreut_zeile), die Namen darin sind dort maskiert.
       return `<article class="karte">
   <div class="karte-oben"><div class="pillen">${pillen}</div><span class="datum">Abgeschlossen ${esc(w.abschluss_text)}</span></div>
   <h3><a href="${seite}">${esc(w.titel)}</a></h3>
-  <p class="wer">${w.personen.map(p => `<a href="profil/${p.slug}.html">${esc(p.name)}</a>`).join(", ")} · ${esc(w.hs)} · ${esc(w.sg)}</p>
+  <p class="wer">${w.personen.map(p => `<a href="profil/${p.slug}.html">${esc(p.name)}</a>`).join(", ")} · <a href="einrichtung/${w.hs_slug}.html">${esc(w.hs)}</a> · ${esc(w.sg)}</p>
+  <p class="betreut"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg><span>Betreut von ${w.betreut_html}</span></p>
   <p class="ergebnis"><b>Ergebnis:</b> ${esc(w.ergebnis)}</p>
   <ul class="stichwoerter" aria-label="Stichwörter">${stw}</ul>
   <details><summary>Strukturierte Kurzfassung</summary>
@@ -154,7 +156,7 @@
     <h4>Bedeutung für die Versorgung</h4><p>${esc(w.be)}</p></div>
     <p style="margin:12px 0 0"><a class="knopf leise" href="${seite}">Zur ganzen Seite der Arbeit →</a></p>
   </details>
-  <p class="meta-zeile">DOI ${esc(w.doi)} · Betreuung: ${esc(betreuung)}</p>
+  <p class="meta-zeile">DOI ${esc(w.doi)}</p>
   <div class="knopfreihe"><button class="knopf" type="button" data-zitat="${esc(w.nr)}">Zitieren</button>${voll}</div>
 </article>`;
     }
